@@ -3,7 +3,7 @@ formatos = {}
 cf.MY_DATABASE = "data/formatos.json"
 def Newformato(formato:dict):
     formatos.update(formato)
-    cf.AddData(formato["id", formatos])
+    cf.AddData(formato["id"])
 
 def delformato():
     id = input("Ingrese el id de la formato: ")

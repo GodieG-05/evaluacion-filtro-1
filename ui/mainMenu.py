@@ -138,36 +138,70 @@ def GestorPeliculas():
             case "1":
         
                 pelicula = {
-                    "P01":{
-                        "id":"P01",
-                        "nombre":input("ingrese el nombre de la pelicula: "),
-                        "duracion":input("ingrese el nombre de la pelicula: "),
-                        "sinopsis":input("ingrese la sinopsis de la pelicula: "),
-                        "generos":{
+                    
+                        "id":"",
+                        "nombre":"",
+                        "duracion":"",
+                        "sinopsis":""
+                            
+                        }
+                
+                for clave, valor in pelicula.items():
+                    pelicula[clave] = input(f"Ingrese {clave.capitalize()} de la pelicula: ")
+        
+                generos = {
+                            "generos":{
                             "G01":{
-                                "id":"G01",
+                                "id":input("Ingrese el Id del genero de la pelicula: "),
                                 "nombre":input("ingrese el nombre del genero de la pelicula: ")
                             }
-                        },
-                        "actores":{
-                            "A01":{
-                                "id":"A01",
-                                "nombre":input("ingrese el nombre del actor de la pelicula: "),
-                                "rol":input("ingrese el rol del actor de la pelicula. protagonista/antagonista/reparto")
-                            }
-                        },
-                        "formato":{
-                            "F01":{
-                                "id":"F01",
-                                "nombre":input("Ingrese el nombre del formato de la pelicula: "),
-                                "NroCopias":input("Ingrese el numero de copias: "),           
-                                "valorPrestamo":input("Ingrese el valor del prestamo: " )
-                            }
-                        
                         }
                     }
-                }
-                p.NewPelicula(pelicula)
+                pelicula.update(generos)
+                
+                actores = {
+                            "actores":{
+                            "A01":{
+                                "id":input("Ingrese el Id del del actor de la pelicula: "),
+                                "nombre":input("ingrese el nombre del actor de la pelicula: "),
+                                "rol":input("ingrese el rol del actor de la pelicula. protagonista/antagonista/reparto: ")
+                            }
+                        }
+                    }
+                pelicula.update(actores)
+
+                formatos = {
+                            "formato":{
+                            "F01":{
+                                "id":"",
+                                "nombre":"",
+                                "NroCopias":0,           
+                                "valorPrestamo":0
+                            }
+                        }
+                    }
+    
+                for clave, valor in formatos["formato"].items():
+                    if (valor!= "NroCopias" and clave != "valorPrestamos"):
+                        formatos[valor] = input(f"Ingrese {clave.capitalize()} de la pelicula: ")
+                    else:
+                        while True:    
+                            try:
+                                formatos["NroCopias"] = int(input(f"Ingrese el numero de copias de la pelicula: "))
+                            except ValueError:
+                                print("Se espera un numero entero")
+                            else:
+                                break
+                        while True:    
+                            try:
+                                formatos["valorPrestamo"] = int(input(f"Ingrese el valor del prestamo de la pelicula: "))
+                            except ValueError:
+                                print("Se espera un numero entero")
+                            else:
+                                break
+                pelicula.update(formatos)
+                print(pelicula)
+                #p.NewPelicula(pelicula)
             case "2":
                 p.delPelicula()
             case "3":
